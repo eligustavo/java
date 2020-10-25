@@ -28,7 +28,6 @@ public abstract class Funcionario {
         this.salario = salario;
     }
 
-    @Override
     public String toString() {
         return "Funcionario [nome= " + nome + ", salario= " + salario + "]";
     }

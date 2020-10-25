@@ -8,7 +8,6 @@ public class Calculadora {
     }
 
     public void subtrai() {
-
         System.out.println(5 - 5);
     }
 
@@ -52,6 +51,7 @@ public class Calculadora {
     }
 
     public void somaVarArgs(int... numeros) {
+       System.out.println("Dentro do VarArgs");
         int soma = 0;
         for (int num : numeros) {
             soma += num;
