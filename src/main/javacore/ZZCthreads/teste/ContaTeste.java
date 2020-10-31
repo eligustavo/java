@@ -11,15 +11,29 @@ public class ContaTeste implements Runnable {
         Thread joao = new Thread(cTeste, "João");
         elivelton.start();
         joao.start();
+        imprime();
+    }
+
+    public static void imprime(){
+        synchronized (ContaTeste.class){
+            System.out.println("alguma coisa");
+        }
     }
 
     private void saque(int valor) {
-        if (conta.getSaldo() >= valor) {
-            System.out.println(Thread.currentThread().getName() + " está indo sacar");
-            conta.saque(valor);
-            System.out.println(Thread.currentThread().getName() + " completou o saque, saldo: " + conta.getSaldo());
-        } else {
-            System.out.println("Sem dinheiro para " + Thread.currentThread() + " efetuar o saque, saldo: " + conta.getSaldo());
+        synchronized (conta) {
+            if (conta.getSaldo() >= valor) {
+                System.out.println(Thread.currentThread().getName() + " está indo sacar");
+                conta.saque(valor);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName() + " completou o saque, saldo: " + conta.getSaldo());
+            } else {
+                System.out.println("Sem dinheiro para " + Thread.currentThread().getName() + " efetuar o saque, saldo: " + conta.getSaldo());
+            }
         }
     }
 
